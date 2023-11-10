@@ -13,11 +13,11 @@ module.exports = {
   deploy: {
     production: {
       user: 'trmntsv',
-      host: '158.160.102.154',
+      host: '51.250.9.252',
       ref: 'origin/main',
       repo: 'git@github.com:Alchimik981/movies-explorer-api.git',
       path: '/home/trmntsv/auto-deploy',
-      'pre-deploy-local': 'scp .env trmntsv@158.160.102.154:/home/trmntsv/auto-deploy/current/backend',
+      'pre-deploy-local': 'scp .env trmntsv@51.250.9.252:/home/trmntsv/auto-deploy/current/backend',
       'post-deploy': 'pwd && cd backend && npm i && pm2 startOrRestart ecosystem.config.js --env production',
     },
   },
