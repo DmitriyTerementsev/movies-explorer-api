@@ -9,29 +9,6 @@ require('dotenv').config();
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params.userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError(
-          'Произошла ошибка: Пользователь с данным id не найден',
-        );
-      }
-      res.status(200).send(user);
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(
-          new BadRequestError(
-            'Произошла ошибка: Пользователь с данным id не найден',
-          ),
-        );
-        return;
-      }
-      next(err);
-    });
-};
-
 module.exports.createUser = (req, res, next) => {
   const {
     name, email, password,
@@ -88,43 +65,6 @@ module.exports.changeInfo = (req, res, next) => {
       } else {
         res.status(200).send(user);
       }
-    })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(
-          new BadRequestError(
-            'Произошла ошибка: Переданы некорректные данные пользователя',
-          ),
-        );
-      } else if (err.name === 'CastError') {
-        next(
-          new BadRequestError(
-            'Произошла ошибка: Пользователь с данным id не найден',
-          ),
-        );
-      } else {
-        next(err);
-      }
-    });
-};
-
-module.exports.changeAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-  User.findByIdAndUpdate(
-    req.user._id,
-    { avatar },
-    {
-      new: true,
-      runValidators: true,
-    },
-  )
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError(
-          'Произошла ошибка: Пользователь с данным id не найден',
-        );
-      }
-      res.status(RES_OK).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
