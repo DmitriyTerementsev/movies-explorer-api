@@ -26,7 +26,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "lint": "npx eslint ."
+    "lint": "npx eslint"
   },
   "repository": "https://github.com/Alchimik981/movies-explorer-api.git",
   "author": "Dmitriy Terementsev <d.terementsev@yandex.ru>",

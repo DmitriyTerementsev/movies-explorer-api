@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const router = require('./routes/api');
+const router = require('./routes/index');
 const InternalServerError = require('./middlewares/error');
 
 const app = express();

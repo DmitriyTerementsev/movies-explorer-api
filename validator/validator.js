@@ -56,28 +56,10 @@ module.exports.validateUserInfo = celebrate({
         'string.min': 'Текст должен быть не короче 2 символов',
         'string.max': 'Текст должен быть не длиннее 30 символов',
       }),
-    about: Joi.string().required().min(2).max(30)
-      .messages({
-        'string.empty': 'Это поле обязательное для заполнения',
-        'string.min': 'Текст должен быть не короче 2 символов',
-        'string.max': 'Текст должен быть не длиннее 30 символов',
-      }),
   }),
 });
 
-module.exports.validateAvatar = celebrate({
-  body: Joi.object().keys({
-    avatar: Joi.string()
-      .required()
-      .messages({
-        'string.empty': 'Это поле обязательное для заполнения',
-      })
-      .pattern(pattern)
-      .message('Введите URL'),
-  }),
-});
-
-module.exports.validateCard = celebrate({
+module.exports.validateMovie = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30)
       .messages({
@@ -105,7 +87,7 @@ module.exports.validateUserId = celebrate({
   }),
 });
 
-module.exports.validateCardId = celebrate({
+module.exports.validateMovieId = celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required()
       .messages({
