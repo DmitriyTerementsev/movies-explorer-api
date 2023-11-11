@@ -19,10 +19,10 @@ router.get('/crash-test', () => {
 
 router.post('/signin', validateLogin, login);
 router.post('/signup', validateUser, createUser);
-router.post('/signout', logout);
 
 router.use(auth);
 
+router.post('/signout', logout);
 router.use('/users', routerUsers);
 router.use('/movies', routerMovies);
 

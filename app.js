@@ -4,13 +4,15 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const rateLimiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
 const InternalServerError = require('./middlewares/error');
+require('dotenv').config();
 
 const app = express();
 
-const { PORT = 3000, MONGO_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
+const { PORT = 3000, MONGO_URL } = process.env;
 
 app.use(express.json());
 const corseAllowedOrigins = [
@@ -18,6 +20,8 @@ const corseAllowedOrigins = [
   'https://localhost:5173',
   'http://localhost:3000',
   'https://localhost:3000',
+  'http://movies-trmntsv.nomoredomainsmonster.ru',
+  'https://movies-trmntsv.nomoredomainsmonster.ru',
 ];
 // используем cors
 app.use(cors({
@@ -29,6 +33,7 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.options('*', cors());
+app.use(rateLimiter);
 app.use(helmet());
 app.use(requestLogger);
 app.use(router);

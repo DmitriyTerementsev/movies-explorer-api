@@ -5,7 +5,7 @@ const { RES_OK, RES_CREATED } = require('../utils/GoodRequest');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movie) => res.status(RES_OK).send(movie.reverse()))
     .catch(next);
 };
