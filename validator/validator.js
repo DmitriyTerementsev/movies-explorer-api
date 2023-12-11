@@ -76,12 +76,3 @@ module.exports.validateUserId = celebrate({
   }),
 });
 
-module.exports.validateMovieId = celebrate({
-  params: Joi.object().keys({
-    cardId: Joi.string().length(24).hex().required()
-      .messages({
-        'string.length': 'Фиксированное количество символов id - 24',
-        'string.empty': 'Это поле обязательное для заполнения',
-      }),
-  }),
-});
