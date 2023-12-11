@@ -61,19 +61,17 @@ module.exports.validateUserInfo = celebrate({
 
 module.exports.validateMovie = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30)
-      .messages({
-        'string.min': 'Минимальное количество символов - 2',
-        'string.max': 'Максимальное количество символов - 30',
-        'string.empty': 'Это поле обязательное для заполнения',
-      }),
-    link: Joi.string()
-      .required()
-      .pattern(pattern)
-      .message('Введите URL')
-      .messages({
-        'string.empty': 'Это поле обязательное для заполнения',
-      }),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required().min(4),
+    description: Joi.string().required(),
+    image: Joi.string().required().regex(linkRegEx),
+    trailerLink: Joi.string().required().regex(linkRegEx),
+    thumbnail: Joi.string().required().regex(linkRegEx),
+    movieId: Joi.number().required(),
   }),
 });
 
