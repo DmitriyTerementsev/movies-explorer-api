@@ -30,11 +30,6 @@ module.exports.validateUser = celebrate({
       'string.min': 'Текст должен быть не короче 2 символов',
       'string.max': 'Текст должен быть не длиннее 30 символов',
     }),
-    about: Joi.string().min(2).max(30).messages({
-      'string.min': 'Текст должен быть не короче 2 символов',
-      'string.max': 'Текст должен быть не длиннее 30 символов',
-    }),
-    avatar: Joi.string().pattern(pattern).message('Введите URL'),
     email: Joi.string()
       .required()
       .messages({
@@ -50,12 +45,8 @@ module.exports.validateUser = celebrate({
 
 module.exports.validateUserInfo = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30)
-      .messages({
-        'string.empty': 'Это поле обязательное для заполнения',
-        'string.min': 'Текст должен быть не короче 2 символов',
-        'string.max': 'Текст должен быть не длиннее 30 символов',
-      }),
+    name: Joi.string().min(2).max(30).required(),
+    email: Joi.string().required().email(),
   }),
 });
 
