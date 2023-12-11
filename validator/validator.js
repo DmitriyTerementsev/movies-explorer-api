@@ -59,9 +59,9 @@ module.exports.validateMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required().min(4),
     description: Joi.string().required(),
-    image: Joi.string().required().regex(linkRegEx),
-    trailerLink: Joi.string().required().regex(linkRegEx),
-    thumbnail: Joi.string().required().regex(linkRegEx),
+    image: Joi.string().required().regex(pattern),
+    trailerLink: Joi.string().required().regex(pattern),
+    thumbnail: Joi.string().required().regex(pattern),
     movieId: Joi.number().required(),
   }),
 });
